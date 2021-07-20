@@ -8,6 +8,8 @@
 <h1>Table of Contents:</h1>
 
 - [Installation](#installation)
+- [How Octopool Works?](#how-octopool-works)
+- [Usage](#usage)
 - [Example](#example)
 
 # Installation
@@ -18,9 +20,48 @@
 go get -u github.com/burntcarrot/octopool
 ```
 
+# How Octopool Works?
+
+Octopool is based on the principle that users can call the octopus to handle jobs for them.
+
+The octopus:
+- Assigns the given job to a worker if available
+- Promotes a job to the pool and assigns a worker to it, if workers are available after completing jobs.
+- Executes jobs with the help of a worker.
+- Maintains the job queue, which is used when the number of jobs exceed the pool's capacity to hold pending jobs.
+
+# Usage
+
+The octopus provides an easy-to-use API to create and handle jobs.
+
+The user can create a job like this:
+
+```
+job1 := func() {
+    defer wg.Done()
+    fmt.Println("Hello from octopool!")
+}
+```
+
+The job is just a function, which can hold anything in its body, like a function call, a print statement, etc.
+
+> Note: Remember to keep the job's initial line to `defer wg.Done()` as it would prevent other jobs to abruptly stop the current job's execution. **You should maintain a WaitGroup to prevent overriding execution of jobs. The example with a WaitGroup is given in the [Example](#example) section.**
+
+Once the job has been created, the user can call the octopus to handle the incoming job:
+
+```
+octo.HandleJob(job1, "normal-octojob")
+```
+
+`octopool` lets the user to name jobs. This is not an required argument, but comes in handy while debugging.
+
 # Example
 
-Here's an example on how Octopool uses a default pool capacity in order to prevent panics:
+In this example, you will see:
+- How Octopool can prevent panics when the octopus is created with an invalid capacity
+- How to create jobs
+- How to let the octopus handle jobs
+- How to implement a WaitGroup to prevent overriding of jobs
 
 ```
 package main
