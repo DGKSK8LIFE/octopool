@@ -1,5 +1,5 @@
 <div align = "center">
-    <img src = "static/octopool.png">
+    <img src = "static/octobanner.svg">
     <h2>Octopool</h2>
     <p>A fast, resilient, easy-to-use worker pool for Go.</p>
     <br>
