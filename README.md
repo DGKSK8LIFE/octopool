@@ -36,7 +36,7 @@ The octopus provides an easy-to-use API to create and handle jobs.
 
 The user can create a job like this:
 
-```
+```go
 job1 := func() {
     defer wg.Done()
     fmt.Println("Hello from octopool!")
@@ -63,7 +63,7 @@ In this example, you will see:
 - How to let the octopus handle jobs
 - How to implement a WaitGroup to prevent overriding of jobs
 
-```
+```go
 package main
 
 import (
