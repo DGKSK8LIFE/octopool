@@ -77,11 +77,11 @@ func TestOctopusHandleJobFullPool(t *testing.T) {
 	testOctopus := NewOctopus(1)
 
 	job1 := func() {
-		time.Sleep(1 * time.Microsecond)
+		time.Sleep(1 * time.Second)
 	}
 
 	job2 := func() {
-		time.Sleep(2 * time.Microsecond)
+		time.Sleep(1 * time.Second)
 	}
 
 	testOctopus.HandleJob(job1, "job 1")
@@ -104,11 +104,11 @@ func TestOctopusProcessNext(t *testing.T) {
 	testOctopus := NewOctopus(1)
 
 	job1 := func() {
-		time.Sleep(1 * time.Microsecond)
+		time.Sleep(1 * time.Second)
 	}
 
 	job2 := func() {
-		time.Sleep(2 * time.Microsecond)
+		time.Sleep(1 * time.Second)
 	}
 
 	testOctopus.HandleJob(job1, "job 1")
@@ -118,7 +118,7 @@ func TestOctopusProcessNext(t *testing.T) {
 	assert.Equal(t, 1, testOctopus.jobQueue.totalJobs)
 
 	// simulate wait for job
-	time.Sleep(2 * time.Microsecond)
+	time.Sleep(2 * time.Second)
 
 	// job should be promoted from queue to pool
 	assert.Equal(t, 0, testOctopus.jobQueue.totalJobs)
