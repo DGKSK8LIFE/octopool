@@ -21,6 +21,7 @@ import (
 type JobQueue struct {
 	jobQueue  []Job // job queue
 	totalJobs int   // total jobs present in the queue
+	capacity  int   // total capacity of the job queue
 }
 
 // Helper functions:
@@ -34,8 +35,13 @@ func (jobQueue *JobQueue) IsNotEmpty() bool {
 
 // Returns a job queue with the specified capacity.
 func NewJobQueue(queueCapacity int) *JobQueue {
-	jobQueue := JobQueue{jobQueue: make([]Job, 0, queueCapacity), totalJobs: 0}
+	jobQueue := JobQueue{jobQueue: make([]Job, 0, queueCapacity), totalJobs: 0, capacity: queueCapacity}
 	return &jobQueue
+}
+
+// Returns job queue capacity.
+func (jobQueue *JobQueue) QueueCapacity() int {
+	return jobQueue.capacity
 }
 
 // Adds a job to the job queue.
