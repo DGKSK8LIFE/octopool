@@ -45,6 +45,13 @@ func TestNegativeOctopus(t *testing.T) {
 	assert.Equal(t, 1000, testOctopus.workerPool.capacity, "octopus should have the default capacity (1000).")
 }
 
+// Test for checking the pool capacity.
+func TestOctopusCapacity(t *testing.T) {
+	testOctopus := NewOctopus(1)
+
+	assert.Equal(t, 1, testOctopus.PoolCapacity())
+}
+
 // Test for checking the behavior when an octopus is given a job.
 func TestOctopusHandleJob(t *testing.T) {
 	testOctopus := NewOctopus(10)
