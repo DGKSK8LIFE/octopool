@@ -98,3 +98,64 @@ func TestOctopusInvalidJob(t *testing.T) {
 
 	assert.Equal(t, "invalid function", err.Error())
 }
+
+// Test for checking the behavior when an octopus promotes and assigns a job.
+func TestOctopusProcessNext(t *testing.T) {
+	testOctopus := NewOctopus(1)
+
+	job1 := func() {
+		time.Sleep(1 * time.Microsecond)
+	}
+
+	job2 := func() {
+		time.Sleep(2 * time.Microsecond)
+	}
+
+	testOctopus.HandleJob(job1, "job 1")
+	testOctopus.HandleJob(job2, "job 2")
+
+	// one job should be in queue
+	assert.Equal(t, 1, testOctopus.jobQueue.totalJobs)
+
+	// simulate wait for job
+	time.Sleep(2 * time.Microsecond)
+
+	// job should be promoted from queue to pool
+	assert.Equal(t, 0, testOctopus.jobQueue.totalJobs)
+}
+
+// Test for checking the behavior when the number of active workers when a job is assigned to an octopus.
+func TestOctopusActiveWorkers(t *testing.T) {
+	testOctopus := NewOctopus(5)
+
+	job1 := func() {
+		time.Sleep(1 * time.Second)
+	}
+
+	job2 := func() {
+		time.Sleep(1 * time.Second)
+	}
+
+	testOctopus.HandleJob(job1, "job 1")
+	testOctopus.HandleJob(job2, "job 2")
+
+	assert.Equal(t, 2, testOctopus.ActiveWorkers())
+}
+
+// Test for checking the behavior when the number of available workers when a job is assigned to an octopus.
+func TestOctopusAvailableWorkers(t *testing.T) {
+	testOctopus := NewOctopus(5)
+
+	job1 := func() {
+		time.Sleep(1 * time.Second)
+	}
+
+	job2 := func() {
+		time.Sleep(2 * time.Second)
+	}
+
+	testOctopus.HandleJob(job1, "job 1")
+	testOctopus.HandleJob(job2, "job 2")
+
+	assert.Equal(t, 3, testOctopus.AvailableWorkers())
+}
