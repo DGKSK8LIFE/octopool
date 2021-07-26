@@ -1,16 +1,18 @@
 <div align = "center">
-    <img src = "static/octobanner.png">
-    <h2>Octopool</h2>
+    <img src = "static/octo.png" width="150" height="150">
+    <h2>Octopool 🐙</h2>
     <p>A fast, resilient, easy-to-use worker pool for Go.</p>
     <br>
 </div>
 
-<h1>Table of Contents:</h1>
+# Features
 
-- [Installation](#installation)
-- [How Octopool Works?](#how-octopool-works)
-- [Usage](#usage)
-- [Example](#example)
+- Automatic recycling of workers.
+- Job Queue for holding excess jobs when the pool is full.
+- Faster performance and lower memory footprint, due to recycling of workers.
+- Easy-to-use API for handling jobs; the user just needs to send jobs to the octopus.
+- A friendly octopus 🐙 (yes! 😄) for managing all internal operations like promoting jobs to the pool, handling workers and recovering workers when jobs fail.
+
 
 # Installation
 
