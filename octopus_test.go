@@ -29,6 +29,15 @@ func TestOctopus(t *testing.T) {
 	assert.Equal(t, 20, testOctopus.workerPool.capacity, "octopus should have the capacity as mentioned (20).")
 }
 
+// Test for checking the behavior when a new octopus is created with a queue capacity.
+func TestOctopusWithQueueCapacity(t *testing.T) {
+	testOctopus := NewOctopus(20, 50)
+
+	assert.NotNil(t, testOctopus, "octopus should not be nil")
+	assert.Equal(t, 20, testOctopus.workerPool.capacity, "octopus should have the capacity as mentioned (20).")
+	assert.Equal(t, 50, testOctopus.jobQueue.QueueCapacity(), "queue should have the capacity as mentioned (50).")
+}
+
 // Test for checking the behavior when an octopus with an invalid capacity is created.
 func TestInvalidOctopus(t *testing.T) {
 	testOctopus := NewOctopus(0)
