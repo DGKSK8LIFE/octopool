@@ -20,10 +20,10 @@ import (
 )
 
 // pre-defined pool capacity
-const defaultPoolCapacity = 10
+const defaultPoolCapacity = 1000
 
 // pre-defined queue capacity
-const defaultQueueCapacity = 10
+const defaultQueueCapacity = 10000
 
 // predefined errors
 
