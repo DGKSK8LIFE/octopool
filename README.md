@@ -2,7 +2,10 @@
     <img src = "static/octo.png" width="150" height="150">
     <h2>Octopool 🐙</h2>
     <p>A fast, resilient, easy-to-use worker pool for Go.</p>
-    <br>
+    <a href = "https://github.com/burntcarrot/octopool/actions?workflow=Tests"><img src = "https://github.com/burntcarrot/octopool/workflows/Tests/badge.svg"></a>
+	<a href="https://codecov.io/gh/burntcarrot/octopool"><img src="https://codecov.io/gh/burntcarrot/octopool/branch/main/graph/badge.svg"/></a>
+	<a href="https://pkg.go.dev/github.com/burntcarrot/octopool"><img src="https://godoc.org/github.com/burntcarrot/octopool?status.svg" /></a>
+	<br>
 </div>
 
 # Features
