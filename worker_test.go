@@ -32,7 +32,10 @@ func TestWorker(t *testing.T) {
 		fmt.Println("Raising error intentionally:", x/y)
 	}
 
-	testOctopus.HandleJob(job1, "division")
+	err := testOctopus.HandleJob(job1, "division")
+	if err != nil {
+		t.Errorf("Got error while handling job: %v", err)
+	}
 
 	time.Sleep(1 * time.Second)
 	// if worker returns error, then it will be available
