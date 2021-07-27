@@ -69,7 +69,10 @@ func TestOctopusHandleJob(t *testing.T) {
 		time.Sleep(1 * time.Microsecond)
 	}
 
-	testOctopus.HandleJob(job1, "job 1")
+	err := testOctopus.HandleJob(job1, "job 1")
+	if err != nil {
+		t.Errorf("Got error while handling job: %v", err)
+	}
 
 	assert.Equal(t, 1, testOctopus.ActiveWorkers())
 }
@@ -100,8 +103,15 @@ func TestOctopusHandleJobFullPool(t *testing.T) {
 		time.Sleep(1 * time.Second)
 	}
 
-	testOctopus.HandleJob(job1, "job 1")
-	testOctopus.HandleJob(job2, "job 2")
+	err := testOctopus.HandleJob(job1, "job 1")
+	if err != nil {
+		t.Errorf("Got error while handling job: %v", err)
+	}
+
+	err = testOctopus.HandleJob(job2, "job 2")
+	if err != nil {
+		t.Errorf("Got error while handling job: %v", err)
+	}
 
 	assert.Equal(t, 1, testOctopus.jobQueue.totalJobs)
 }
@@ -127,8 +137,15 @@ func TestOctopusProcessNext(t *testing.T) {
 		time.Sleep(1 * time.Second)
 	}
 
-	testOctopus.HandleJob(job1, "job 1")
-	testOctopus.HandleJob(job2, "job 2")
+	err := testOctopus.HandleJob(job1, "job 1")
+	if err != nil {
+		t.Errorf("Got error while handling job: %v", err)
+	}
+
+	err = testOctopus.HandleJob(job2, "job 2")
+	if err != nil {
+		t.Errorf("Got error while handling job: %v", err)
+	}
 
 	// one job should be in queue
 	assert.Equal(t, 1, testOctopus.jobQueue.totalJobs)
@@ -152,8 +169,15 @@ func TestOctopusActiveWorkers(t *testing.T) {
 		time.Sleep(1 * time.Second)
 	}
 
-	testOctopus.HandleJob(job1, "job 1")
-	testOctopus.HandleJob(job2, "job 2")
+	err := testOctopus.HandleJob(job1, "job 1")
+	if err != nil {
+		t.Errorf("Got error while handling job: %v", err)
+	}
+
+	err = testOctopus.HandleJob(job2, "job 2")
+	if err != nil {
+		t.Errorf("Got error while handling job: %v", err)
+	}
 
 	assert.Equal(t, 2, testOctopus.ActiveWorkers())
 }
@@ -170,8 +194,15 @@ func TestOctopusAvailableWorkers(t *testing.T) {
 		time.Sleep(2 * time.Second)
 	}
 
-	testOctopus.HandleJob(job1, "job 1")
-	testOctopus.HandleJob(job2, "job 2")
+	err := testOctopus.HandleJob(job1, "job 1")
+	if err != nil {
+		t.Errorf("Got error while handling job: %v", err)
+	}
+
+	err = testOctopus.HandleJob(job2, "job 2")
+	if err != nil {
+		t.Errorf("Got error while handling job: %v", err)
+	}
 
 	assert.Equal(t, 3, testOctopus.AvailableWorkers())
 }
