@@ -6,6 +6,7 @@
 	<a href="https://codecov.io/gh/burntcarrot/octopool"><img src="https://codecov.io/gh/burntcarrot/octopool/branch/main/graph/badge.svg"/></a>
 	<a href="https://pkg.go.dev/github.com/burntcarrot/octopool"><img src="https://godoc.org/github.com/burntcarrot/octopool?status.svg" /></a>
 	<br>
+	<img src = "static/term-preview-octopool.svg">
 </div>
 
 # Features
