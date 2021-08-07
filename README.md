@@ -4,8 +4,9 @@
     <p>A fast, resilient, easy-to-use worker pool for Go.</p>
     <a href = "https://github.com/burntcarrot/octopool/actions?workflow=Tests"><img src = "https://github.com/burntcarrot/octopool/workflows/Tests/badge.svg"></a>
 	<a href="https://codecov.io/gh/burntcarrot/octopool"><img src="https://codecov.io/gh/burntcarrot/octopool/branch/main/graph/badge.svg"/></a>
+	<a href="https://goreportcard.com/report/github.com/burntcarrot/octopool"><img src="https://goreportcard.com/badge/github.com/burntcarrot/octopool" /></a>
 	<a href="https://pkg.go.dev/github.com/burntcarrot/octopool"><img src="https://godoc.org/github.com/burntcarrot/octopool?status.svg" /></a>
-	<br>
+	<br><br>
 	<img src = "static/term-preview-octopool.svg">
 </div>
 
@@ -114,5 +115,3 @@ Hello from octopool!
 2021/07/20 19:06:09 assigning job: greet-user to a worker.
 Hello user!
 ```
-
-More examples to be added.

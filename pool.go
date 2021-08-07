@@ -26,7 +26,7 @@ const (
 
 type pool struct {
 	status           state      // represents current state of the pool
-	capacity         int        // number of workers the pool can accomodate
+	capacity         int        // number of workers the pool can accommodate
 	availableWorkers sync.Pool  // pool of available workers
 	activeWorkers    int        // number of active workers
 	closePool        sync.Once  // closes pool and can be called only once
