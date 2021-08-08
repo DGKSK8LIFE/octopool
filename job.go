@@ -16,7 +16,7 @@ package octopool
 
 import "fmt"
 
-// Struct for job.
+// Job is a struct for representing an executable job.
 type Job struct {
 	function func() // the job's function
 	name     string // name for the job

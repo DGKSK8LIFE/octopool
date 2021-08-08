@@ -18,7 +18,7 @@ import (
 	"errors"
 )
 
-// Struct for a job queue.
+// JobQueue is a struct for representing a queue which holds pending jobs.
 type JobQueue struct {
 	jobQueue  []Job // job queue
 	totalJobs int   // total jobs present in the queue
@@ -40,7 +40,7 @@ func NewJobQueue(queueCapacity int) *JobQueue {
 	return &jobQueue
 }
 
-// QueCapacity returns job queue capacity.
+// QueueCapacity returns job queue capacity.
 func (jobQueue *JobQueue) QueueCapacity() int {
 	return jobQueue.capacity
 }

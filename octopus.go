@@ -36,7 +36,7 @@ var ErrInvalidPoolCapacity = errors.New("invalid pool capacity: pool capacity mu
 // ErrInvalidPoolState is the error raised when the pool is closed and no jobs can be sent to the pool.
 var ErrInvalidPoolState = errors.New("cannot assign job to closed pool")
 
-// Struct for octopus.
+// Octopus is a struct for representing the octopus which handles the execution of jobs.
 type Octopus struct {
 	workerPool   *pool     // worker pool
 	jobQueue     *JobQueue // job queue for holding tasks
