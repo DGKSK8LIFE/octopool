@@ -27,12 +27,16 @@ const defaultQueueCapacity = 10000
 
 // predefined errors
 
+// ErrNilFunction is the error raised when a function is invalid.
 var ErrNilFunction = errors.New("invalid function")
 
+// ErrInvalidPoolCapacity is the error raised when the pool capacity provided is invalid in nature.
 var ErrInvalidPoolCapacity = errors.New("invalid pool capacity: pool capacity must be a positive number, cannot process jobs in a pool with a capacity equal to or less than zero")
 
+// ErrInvalidPoolState is the error raised when the pool is closed and no jobs can be sent to the pool.
 var ErrInvalidPoolState = errors.New("cannot assign job to closed pool")
 
+// Struct for octopus.
 type Octopus struct {
 	workerPool   *pool     // worker pool
 	jobQueue     *JobQueue // job queue for holding tasks
@@ -41,29 +45,29 @@ type Octopus struct {
 
 // Basic helper functions:
 
-// Returns pool's capacity.
+// PoolCapacity returns pool's capacity.
 func (octo *Octopus) PoolCapacity() int {
 	return octo.workerPool.getPoolCapacity()
 }
 
-// Returns number of active workers.
+// ActiveWorkers returns number of active workers.
 func (octo *Octopus) ActiveWorkers() int {
 	return octo.workerPool.getActiveWorkersCount()
 }
 
-// Returns number of available workers.
+// AvailableWorkers returns number of available workers.
 func (octo *Octopus) AvailableWorkers() int {
 	return octo.workerPool.getPoolCapacity() - octo.workerPool.getActiveWorkersCount()
 }
 
-// Closes the worker pool.
+// Close closes the worker pool.
 func (octo *Octopus) Close() {
 	octo.workerPool.close()
 }
 
 // Octopus related functions:
 
-// Creates an octopus with the capacity specified.
+// NewOctopus creates an octopus with the capacity specified.
 func NewOctopus(capacity int, queueCapacity ...int) *Octopus {
 	// handle invalid capacity
 	if capacity <= 0 {
@@ -99,7 +103,7 @@ func NewOctopus(capacity int, queueCapacity ...int) *Octopus {
 	return octopus
 }
 
-// Assigns a job to a worker if workers are available, else, adds to the job queue.
+// HandleJob assigns a job to a worker if workers are available, else, adds to the job queue.
 func (octo *Octopus) HandleJob(fun func(), name ...string) error {
 	// throw error if pool is closed
 	if octo.workerPool.status == PoolClosed {

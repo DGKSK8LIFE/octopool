@@ -19,9 +19,12 @@ import "sync"
 // Represents state for the pool.
 type state int
 
+// Constants for pool states.
 const (
-	PoolOpen   state = 0 // can process new tasks
-	PoolClosed state = 1 // cannot process new tasks
+	// PoolOpen states that the pool can process new jobs
+	PoolOpen state = 0
+	// PoolClosed states that the pool cannot process new jobs
+	PoolClosed state = 1
 )
 
 type pool struct {

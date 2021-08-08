@@ -16,6 +16,7 @@ package octopool
 
 import "fmt"
 
+// Struct for job.
 type Job struct {
 	function func() // the job's function
 	name     string // name for the job
@@ -27,11 +28,11 @@ func (job Job) String() string {
 }
 
 // Returns the job's function.
-func (t *Job) getJob() func() {
-	return t.function
+func (job *Job) getJob() func() {
+	return job.function
 }
 
-// Returns a job with the function wrapped.
+// NewJob returns a job with the function wrapped.
 func NewJob(fun func()) Job {
 	return Job{
 		function: fun,
