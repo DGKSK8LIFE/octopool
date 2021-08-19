@@ -1,6 +1,7 @@
 package octopool_test
 
 import (
+	"fmt"
 	"sync"
 	"testing"
 	"time"
@@ -20,7 +21,10 @@ func benchmarkOctopus(poolCapacity int, queueCapacity int, b *testing.B) {
 
 	for i := 0; i < b.N; i++ {
 		wg.Add(1)
-		pool.HandleJob(job1, "normal-octojob")
+		err := pool.HandleJob(job1, "normal-octojob")
+		if err != nil {
+			fmt.Println(err.Error())
+		}
 	}
 	wg.Wait()
 }
