@@ -178,3 +178,7 @@ Benchmark_Octopus_Pool10000_Queue100000-8     	   10000	     20271 ns/op	     87
 PASS
 ok  	command-line-arguments	112.982s
 ```
+
+## Contribution Guide:
+
+Read the Contribution Guide [here](CONTRIBUTING.md).
