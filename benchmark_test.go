@@ -2,7 +2,6 @@ package octopool_test
 
 import (
 	"fmt"
-	"sync"
 	"testing"
 	"time"
 
@@ -12,21 +11,17 @@ import (
 func benchmarkOctopus(poolCapacity int, queueCapacity int, b *testing.B) {
 	pool := octopool.NewOctopus(poolCapacity, queueCapacity)
 
-	var wg sync.WaitGroup
-
 	job1 := func() {
-		defer wg.Done()
 		time.Sleep(100 * time.Millisecond)
 	}
 
 	for i := 0; i < b.N; i++ {
-		wg.Add(1)
 		err := pool.HandleJob(job1, "normal-octojob")
 		if err != nil {
 			fmt.Println(err.Error())
 		}
 	}
-	wg.Wait()
+	pool.Wait()
 }
 
 func Benchmark_Octopus_Pool10_Queue100(b *testing.B) {

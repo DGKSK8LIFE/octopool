@@ -23,7 +23,9 @@ type worker struct {
 
 // Executes the job provided to the worker.
 func (w *worker) run() {
+	w.pool.wg.Add(1)
 	go func() {
+		defer w.pool.wg.Done()
 		defer func() {
 			// silently recover from error, do not panic
 			if r := recover(); r != nil {
