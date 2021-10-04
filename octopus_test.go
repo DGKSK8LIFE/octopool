@@ -206,3 +206,29 @@ func TestOctopusAvailableWorkers(t *testing.T) {
 
 	assert.Equal(t, 3, testOctopus.AvailableWorkers())
 }
+
+func TestOctopusWait(t *testing.T) {
+	testOctopus := NewOctopus(5)
+
+	job1 := func() {
+		time.Sleep(1 * time.Second)
+	}
+
+	job2 := func() {
+		time.Sleep(2 * time.Second)
+	}
+
+	err := testOctopus.HandleJob(job1, "job 1")
+	if err != nil {
+		t.Errorf("Got error while handling job: %v", err)
+	}
+
+	err = testOctopus.HandleJob(job2, "job 2")
+	if err != nil {
+		t.Errorf("Got error while handling job: %v", err)
+	}
+
+	testOctopus.Wait()
+
+	assert.Equal(t, 5, testOctopus.AvailableWorkers())
+}
