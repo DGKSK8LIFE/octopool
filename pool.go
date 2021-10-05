@@ -28,13 +28,14 @@ const (
 )
 
 type pool struct {
-	status           state      // represents current state of the pool
-	capacity         int        // number of workers the pool can accommodate
-	availableWorkers sync.Pool  // pool of available workers
-	activeWorkers    int        // number of active workers
-	closePool        sync.Once  // closes pool and can be called only once
-	mu               sync.Mutex // mutex for locking
-	octopus          *Octopus   // provides an API to interact with the pool
+	status           state          // represents current state of the pool
+	capacity         int            // number of workers the pool can accommodate
+	availableWorkers sync.Pool      // pool of available workers
+	activeWorkers    int            // number of active workers
+	closePool        sync.Once      // closes pool and can be called only once
+	mu               sync.Mutex     // mutex for locking
+	octopus          *Octopus       // provides an API to interact with the pool
+	wg               sync.WaitGroup // used to wait for multiple goroutines to finish
 }
 
 // Basic helper functions:

@@ -45,14 +45,11 @@ The user can create a job like this:
 
 ```go
 job1 := func() {
-    defer wg.Done()
     fmt.Println("Hello from octopool!")
 }
 ```
 
 The job is just a function, which can hold anything in its body, like a function call, a print statement, etc.
-
-> Note: Remember to keep the job's initial line to `defer wg.Done()` as it would prevent other jobs to abruptly stop the current job's execution. **You should maintain a WaitGroup to prevent overriding execution of jobs. The example with a WaitGroup is given in the [Example](#example) section.**
 
 Once the job has been created, the user can call the octopus to handle the incoming job:
 
@@ -62,6 +59,8 @@ octo.HandleJob(job1, "normal-octojob")
 
 `octopool` lets the user to name jobs. This is not an required argument, but comes in handy while debugging.
 
+Lastly, the user calls `octo.Wait()`.  This call blocks continued execution until all jobs are finished.
+
 # Example
 
 ## Creating an octopus with an invalid capacity:
@@ -70,39 +69,33 @@ In this example, you will see:
 - How Octopool can prevent panics when the octopus is created with an invalid capacity
 - How to create jobs
 - How to let the octopus handle jobs
-- How to implement a WaitGroup to prevent overriding of jobs
+- How to let the octopus handle Wait
 
 ```go
 package main
 
 import (
 	"fmt"
-	"sync"
 
 	"github.com/burntcarrot/octopool"
 )
 
 func main() {
-	var wg sync.WaitGroup
 	octo := octopool.NewOctopus(0)
 
 	job1 := func() {
-		defer wg.Done()
 		fmt.Println("Hello from octopool!")
 	}
 
 	job2 := func() {
-		defer wg.Done()
 		fmt.Println("Hello user!")
 	}
 
 	for i := 0; i < 1; i++ {
-		wg.Add(1)
 		octo.HandleJob(job1, "normal-octojob")
-		wg.Add(1)
 		octo.HandleJob(job2, "greet-user")
-		wg.Wait()
 	}
+	octo.Wait()
 }
 ```
 
@@ -125,32 +118,26 @@ package main
 
 import (
 	"fmt"
-	"sync"
 
 	"github.com/burntcarrot/octopool"
 )
 
 func main() {
-	var wg sync.WaitGroup
 	octo := octopool.NewOctopus(10, 100)
 
 	job1 := func() {
-		defer wg.Done()
 		fmt.Println("Hello from octopool!")
 	}
 
 	job2 := func() {
-		defer wg.Done()
 		fmt.Println("Hello user!")
 	}
 
 	for i := 0; i < 1; i++ {
-		wg.Add(1)
 		octo.HandleJob(job1, "normal-octojob")
-		wg.Add(1)
 		octo.HandleJob(job2, "greet-user")
-		wg.Wait()
 	}
+	octo.Wait()
 }
 ```
 

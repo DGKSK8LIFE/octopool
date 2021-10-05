@@ -147,3 +147,9 @@ func (octo *Octopus) processNext() {
 		log.Println("assigned job:", job.name, "to a worker.")
 	}
 }
+
+// Waits on workers to finish the job
+func (octo *Octopus) Wait() {
+	log.Println("Waiting for jobs to finish....")
+	octo.workerPool.wg.Wait()
+}
