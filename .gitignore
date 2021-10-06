@@ -1,6 +1,3 @@
 coverage.txt
 bench.txt
 coverage
-.vscode/
-main.go
-test-environment/
