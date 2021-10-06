@@ -150,6 +150,44 @@ Hello from octopool!
 Hello user!
 ```
 
+## Performing a GET request on `google.com` and printing the response 100 times 
+
+```go
+package main
+
+import (
+	"io/ioutil"
+	"log"
+	"net/http"
+
+	"github.com/burntcarrot/octopool"
+)
+
+func main() {
+	octo := octopool.NewOctopus(1, 100)
+
+	headerJob := func() {
+		resp, err := http.Get("https://google.com")
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer resp.Body.Close()
+
+		body, err := ioutil.ReadAll(resp.Body)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		log.Println(string(body))
+	}
+
+	for i := 0; i < 100; i++ {
+		octo.HandleJob(headerJob, "header-job")
+	}
+	octo.Wait()
+}
+```
+
 # Benchmarks
 
 Using `go test -benchmem -bench=. -benchtime 10000x benchmark_test.go`:
